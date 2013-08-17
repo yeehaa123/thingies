@@ -21,9 +21,9 @@ describe Hub do
       end
 
       it "should have a list of behaviors" do
-        hubbie.interactions.should_not be_empty
-        hubbie.interactions.each do |interaction|
-          interaction.class.should == Interaction
+        hubbie.behaviors.should_not be_empty
+        hubbie.behaviors.each do |interaction|
+          interaction.class.should == Behavior
         end
       end
 
@@ -61,8 +61,8 @@ describe Hub do
           hubbie.environment.should == [ thingie1 ]
         end
 
-        it "should know this objects interactions" do
-          hubbie.environment.first.interactions == thingie1.interactions
+        it "should know this objects behaviors" do
+          hubbie.environment.first.behaviors == thingie1.behaviors
         end
       end
 
@@ -73,8 +73,8 @@ describe Hub do
           hubbie.environment.should == [ thingie1 ]
         end
 
-        it "should know this objects interactions" do
-          hubbie.environment.first.interactions == thingie1.interactions
+        it "should know this objects behaviors" do
+          hubbie.environment.first.behaviors == thingie1.behaviors
         end
       end
 
@@ -89,7 +89,7 @@ describe Hub do
           hubbie.environment.should == [ thingie1, thingie2 ]
         end
 
-        it "should know this objects interactions" do
+        it "should know all behaviors" do
         end
       end
     end

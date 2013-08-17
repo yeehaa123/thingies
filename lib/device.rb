@@ -1,11 +1,11 @@
 class Device
-  attr_reader :url, :environment, :interactions
+  attr_reader :url, :environment, :behaviors
   
-  def initialize(name, interactions)
+  def initialize(name, behaviors)
     @environment ||= []
     @url = url_from_name(name) 
-    @interactions ||= []
-    add_interactions(interactions)
+    @behaviors ||= []
+    add_behaviors(behaviors)
   end
 
   def listen
@@ -23,9 +23,9 @@ class Device
   
   private
 
-  def add_interactions(names)
+  def add_behaviors(names)
     names.each do |name|
-      @interactions << Interaction.new(name)
+      @behaviors << Behavior.new(name)
     end
   end
   
