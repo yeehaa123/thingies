@@ -18,12 +18,6 @@ class Device
     true
   end
 
-  def register_device(name)
-    url = url_from_name(name)
-    device = DRbObject.new_with_uri(url)
-    @environment << device
-    device
-  end
 
   def to_json
     behaviors.to_json
@@ -40,6 +34,21 @@ class Device
   def url_from_name(name)
     "druby://#{ name }:1234"
   end
+end
+
+class Hub < Device
+
+  def register_device(name)
+    url = url_from_name(name)
+    device = DRbObject.new_with_uri(url)
+    @environment << device
+    device
+  end
+end
+
+class Server < Device
+
+
 end
 
 
