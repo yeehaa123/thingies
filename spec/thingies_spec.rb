@@ -1,4 +1,4 @@
-require_relative '../lib/thingies'
+require 'spec_helper'
 
 describe Hub do
 
