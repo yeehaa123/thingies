@@ -1,0 +1,1 @@
+Interaction = Struct.new(:name)
