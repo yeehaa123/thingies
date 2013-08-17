@@ -3,6 +3,7 @@ require_relative '../lib/thingies'
 describe Hub do
 
   let(:hubbie) { Hub.new("hubbie1", [:on, :off]) }
+  let(:thingie1) { Device.new("thingie1", [:stop, :start]) }
   let(:thingie2) { Device.new("thingie2", [:louder, :softer]) }
   let(:drb_server) { mock("Mock DRb Server") }
 
@@ -46,16 +47,50 @@ describe Hub do
         hubbie.register_device("thingie2").should == thingie2
       end
     end
-    
-    context "with 1 registered device" do
+   
+    context "with registered devices" do 
 
       before do
-        DRbObject.stub(:new_with_uri => thingie2)
-        hubbie.register_device("thingie2")
+        DRbObject.stub(:new_with_uri => thingie1)
+        hubbie.register_device("thingie1")
       end
 
-      it "should return a list with one device" do
-        hubbie.environment.should == [ thingie2 ]
+      context "with 1 registered device" do
+
+        it "should return a list with one device" do
+          hubbie.environment.should == [ thingie1 ]
+        end
+
+        it "should know this objects interactions" do
+          hubbie.environment.first.interactions == thingie1.interactions
+        end
+      end
+
+      context "with 2 registered device" do
+
+
+        it "should return a list with one device" do
+          hubbie.environment.should == [ thingie1 ]
+        end
+
+        it "should know this objects interactions" do
+          hubbie.environment.first.interactions == thingie1.interactions
+        end
+      end
+
+      context "with 2 registered device" do
+
+        before do
+          DRbObject.stub(:new_with_uri => thingie2)
+          hubbie.register_device("thingie2")
+        end
+
+        it "should return a list with one device" do
+          hubbie.environment.should == [ thingie1, thingie2 ]
+        end
+
+        it "should know this objects interactions" do
+        end
       end
     end
   end
