@@ -5,9 +5,7 @@ class Device
     @device_list ||= []
     @url = "druby://#{ url }:1234"
     @behaviors ||= []
-    behaviors.each do |name|
-      @behaviors << Behavior.new(name)
-    end
+    add_behaviors(behaviors)
   end
 
   def listen
@@ -23,6 +21,14 @@ class Device
 
   def to_json
     behaviors.to_json
+  end
+  
+  private
+
+  def add_behaviors(names)
+    names.each do |name|
+      @behaviors << Behavior.new(name)
+    end
   end
 end
 
