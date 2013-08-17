@@ -1,3 +1,3 @@
 # Thingies
 
-** TODO: Add description **
+HTTP for the Internet of Things
