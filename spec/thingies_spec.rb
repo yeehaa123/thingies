@@ -1,7 +1,5 @@
 require_relative '../lib/thingies'
 
-Behavior = Struct.new(:name)
-
 describe Device do
 
   let(:thingie1) { Device.new("thingie1", [:on, :off]) }
@@ -31,12 +29,26 @@ describe Device do
     end
 
     context "with 1 other available devices" do
-
-      xit "should register the other device" do
-        thingie1.register_device("thingie2").should == thingie2
+      
+      before do
+        DRbObject.stub(:new_with_uri => thingie2)
       end
 
-      it "should return a list"
+      it "should register the other device" do
+        thingie1.register_device("thingie2").should == thingie2
+      end
+    end
+    
+    context "with 1 registered device" do
+
+      before do
+        DRbObject.stub(:new_with_uri => thingie2)
+        thingie1.register_device("thingie2")
+      end
+
+      it "should return a list with one device" do
+        thingie1.environment.should == [ thingie2 ]
+      end
     end
   end
 end
