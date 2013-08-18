@@ -12,7 +12,7 @@ describe Hub do
     context "with no other available devices" do
 
       it "should return an empty list" do
-        hubbie.listen.should == []
+        hubbie.environment.class.should == Environment
       end
 
       
@@ -49,6 +49,7 @@ describe Hub do
     end
    
     context "with registered devices" do 
+      let(:environment) { hubbie.environment }
 
       before do
         DRbObject.stub(:new_with_uri => thingie1)
@@ -58,23 +59,11 @@ describe Hub do
       context "with 1 registered device" do
 
         it "should return a list with one device" do
-          hubbie.environment.should == [ thingie1 ]
+          environment.devices.should == [ thingie1 ]
         end
 
         it "should know this objects behaviors" do
-          hubbie.environment.first.behaviors == thingie1.behaviors
-        end
-      end
-
-      context "with 2 registered device" do
-
-
-        it "should return a list with one device" do
-          hubbie.environment.should == [ thingie1 ]
-        end
-
-        it "should know this objects behaviors" do
-          hubbie.environment.first.behaviors == thingie1.behaviors
+          environment.behaviors == thingie1.behaviors
         end
       end
 
@@ -86,10 +75,10 @@ describe Hub do
         end
 
         it "should return a list with one device" do
-          hubbie.environment.should == [ thingie1, thingie2 ]
+          environment.devices.should == [ thingie1, thingie2 ]
         end
 
-        it "should know all behaviors" do
+        xit "should know all behaviors" do
         end
       end
     end

@@ -1,16 +1,12 @@
 class Device
-  attr_reader :url, :environment, :behaviors
+  attr_reader :url, :behaviors
   
   def initialize(name, behaviors)
-    @environment ||= []
     @url = url_from_name(name) 
     @behaviors ||= []
     add_behaviors(behaviors)
   end
 
-  def listen
-    environment
-  end
 
   def present 
     @server = DRb.start_service(@url, self)
