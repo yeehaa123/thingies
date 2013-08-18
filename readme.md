@@ -1,6 +1,6 @@
 # Thingies
 
-HTTP for the Internet of Things
+A universal interface for the internet of things
 
 # IDEAS
 
